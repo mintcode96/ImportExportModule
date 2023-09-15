@@ -15,4 +15,8 @@
       <Folder Include="Controllers\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ImportExportModule.Application\ImportExportModule.Application.csproj" />
+    </ItemGroup>
+
 </Project>
