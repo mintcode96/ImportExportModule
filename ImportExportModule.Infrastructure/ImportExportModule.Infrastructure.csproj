@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>bin\Debug\net7.0\ImportExportModule.Infrastructure.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\net7.0\ImportExportModule.Infrastructure.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Np.Extensions.Metrics" Version="1.0.0" />
+      <PackageReference Include="Np.MediatR" Version="1.0.0" />
+      <PackageReference Include="Np.MemberAuthorizationIncoming" Version="1.1.0" />
+      <PackageReference Include="Np.PostgreSQL" Version="1.0.1" />
+      <PackageReference Include="Np.RabbitMQ" Version="1.0.0" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    </ItemGroup>
+
+</Project>
