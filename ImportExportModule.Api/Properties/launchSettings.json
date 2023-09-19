@@ -1,40 +1,45 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:6416",
-      "sslPort": 44385
-    }
-  },
   "profiles": {
-    "http": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5294",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7251;http://localhost:5294",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        
+        "JwtOptions__SecretKey": "+a%X$Y5xTDIuRytdmJ+BdwqMwb+bn@cXN+3xe2TatWE4FkbKJCBQQ7SnQShwJt%!EFAJmys!DTYA!QnES!pYrhHI2pg84XR2BdCTIkaufYPeP+zmqpQgSMKFL#^j6Wgw",
+        "JwtOptions__Issuer": "Issuer",
+        "JwtOptions__Audience": "Audience",
+        "JwtOptions__IssuerService": "IssuerService",
+        "JwtOptions__AudienceService": "AudienceService",
+
+        "ElasticConfiguration__Uri": "localhost:9200",
+        "ElasticConfiguration__Login": "elastic",
+        "ElasticConfiguration__Password": "elastic",
+
+        "OUTREQUESTRETRYSETTINGS__TIMEOUTINSECONDS": "60",
+        "OUTREQUESTRETRYSETTINGS__RETRYCOUNT": "3",
+
+        "MetricsSettings__EnableMetrics": "true",
+        "MetricsSettings__UseDefaultMetrics": "false",
+        "MetricsSettings__UseDebuggingMetrics": "false",
+
+        "TelegramSettings__Destinations__0__Name": "Developers",
+        "TelegramSettings__Destinations__0__Enabled": "false",
+        "TelegramSettings__Destinations__0__IsDefault": "true",
+        "TelegramSettings__Destinations__0__BotToken": "5336926145:AAGG2FQ_qqE6ww8-mScfFwcXrzmRW3J-e_k",
+        "TelegramSettings__Destinations__0__ChatId": "-610340925",
+
+        "ReportsServiceSettings__BlackListErrorResponse": "CannotFindMemberError",
+
+        "RemoveOldTokenSettings__MaxConcurrentJobs": "1",
+        "RemoveOldTokenSettings__CRON": "0 0 * * 7",
+        "RemoveOldTokenSettings__IsDisabled": "false",
+
+        "PasswordOptions__SecretKey": "123456"
       }
     }
   }

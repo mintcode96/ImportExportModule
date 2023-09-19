@@ -21,6 +21,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ImportExportModule.Application\ImportExportModule.Application.csproj" />
+      <ProjectReference Include="..\ImportExportModule.DataLayer\ImportExportModule.DataLayer.csproj" />
       <ProjectReference Include="..\ImportExportModule.Infrastructure\ImportExportModule.Infrastructure.csproj" />
       <ProjectReference Include="..\ImportExportModule.Models\ImportExportModule.Models.csproj" />
     </ItemGroup>

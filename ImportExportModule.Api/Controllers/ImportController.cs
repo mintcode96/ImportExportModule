@@ -1,4 +1,5 @@
 using ImportExportModule.Infrastructure;
+using ImportExportModule.Models.DTO.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,24 @@ public class ImportController : BaseController
 {
     /// ctor
     public ImportController(IMediator mediator) : base(mediator) { }
-    
-    public async Task<ActionResult> ImportAsync(){}
+
+    /// <summary>
+    /// Загрузка реестра
+    /// </summary>
+    /// <param name="file">excel документ</param>
+    /// <param name="request">тело запроса</param>
+    /// <param name="useFake">использовать ли фейк результат</param>
+    [HttpPost]
+    [ProducesResponseType(typeof(ProblemDetails),StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    public async Task<ActionResult> ImportAsync([FromForm] IFormFile file, [FromBody] ImportRequest request, 
+        [FromQuery] bool useFake)
+    {
+        request.MerchantId ??= MemberId;
+        
+        if (useFake)
+            return Accepted();
+
+        throw new NotImplementedException();
+    }
 }
