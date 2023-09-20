@@ -1,14 +1,16 @@
 using ImportExportModule.Application.Configurations;
 using System.Globalization;
 using System.Reflection;
+using System.Text;
 using Hellang.Middleware.ProblemDetails;
 using ImportExportModule.Api.Configuration;
+using ImportExportModule.Application.ExcelParses;
+using ImportExportModule.DataLayer.Services;
 using Np.Extensions.Metrics;
 using Np.Extensions.Metrics.MediatR;
 using Np.Logging.Logger;
 using Np.MemberAuthorizationIncoming;
 using Np.Swagger;
-using Polly;
 using Prometheus;
 
 const string appName = "auth-service-api";
@@ -33,6 +35,11 @@ builder.Services.ConfigureHttpClients();
 builder.Services.ConfigureJwtBearer();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddSingleton<RegistryMongoService>();
+builder.Services.AddTransient<IExcelParser, CardRegistryParser>();
+
+Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 var app = builder.Build();
 

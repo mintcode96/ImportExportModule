@@ -14,5 +14,13 @@
       <DocumentationFile>bin\Release\net7.0\ImportExportModule.DataLayer.xml</DocumentationFile>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ImportExportModule.Application\ImportExportModule.Application.csproj" />
+    </ItemGroup>
+
 
 </Project>
