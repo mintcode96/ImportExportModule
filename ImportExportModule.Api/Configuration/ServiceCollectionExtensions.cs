@@ -1,5 +1,7 @@
 using System.Reflection;
-using MediatR;
+using ImportExportModule.Application.Commands.ImportRegistry;
+using ImportExportModule.Application.ExcelParses;
+using ImportExportModule.DataLayer.Services;
 using Microsoft.Extensions.Options;
 using Np.Extensions.DependencyInjection;
 using Np.Extensions.Metrics;
@@ -34,13 +36,16 @@ public static class ServiceCollectionExtensions
  
         services.AddSingleton<ITelegramService, TelegramService>();
         services.AddSingleton<IReportService, ReportService>();
+        
+        services.AddSingleton<RegistryMongoService>();
+        services.AddTransient<IExcelParser, CardRegistryParser>();
 
         var assemblies = new[]
         {
             // Explicit assemblies enumeration: AppDomain.CurrentDomain.GetAssemblies()
             // doesn't show all assemblies as loaded in memory during startup
             Assembly.GetExecutingAssembly(),
-            // Assembly.GetAssembly(typeof(LoginCommand)), 
+            Assembly.GetAssembly(typeof(ImportRegistryCommand)), 
         };
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));

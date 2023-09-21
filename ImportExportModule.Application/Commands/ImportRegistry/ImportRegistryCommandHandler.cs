@@ -10,14 +10,16 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
 {
     private readonly RegistryMongoService _registryMongoService;
     private readonly IExcelParser _cardRegistryParser;
-    
+    private readonly IMediator _mediator;
+
     public ImportRegistryCommandHandler(RegistryMongoService registryMongoService,
-        IExcelParser cardRegistryParser)
+        IExcelParser cardRegistryParser, IMediator mediator)
     {
         _registryMongoService = registryMongoService;
         _cardRegistryParser = cardRegistryParser;
+        _mediator = mediator;
     }
-    
+
     public async Task<Result<ImportResponse>> Handle(ImportRegistryCommand request, CancellationToken cancellationToken)
     {
         var elements = await _cardRegistryParser.Parse(request.ImportRegistry);

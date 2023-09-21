@@ -35,8 +35,6 @@ builder.Services.ConfigureJwtBearer();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddSingleton<RegistryMongoService>();
-builder.Services.AddTransient<IExcelParser, CardRegistryParser>();
 
 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
