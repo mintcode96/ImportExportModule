@@ -10,3 +10,7 @@ global using Microsoft.Extensions.Options;
 global using Np.Service.Report;
 global using RabbitMQ.Client;
 global using Serilog;
+global using System.Text;
+global using Newtonsoft.Json;
+global using Np.Extensions.Exceptions;
+global using Np.Extensions.Http;

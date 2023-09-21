@@ -1,10 +1,12 @@
 using System.Reflection;
+using ImportExportModule.Application.ApiClients;
 using ImportExportModule.Application.Commands.ImportRegistry;
 using ImportExportModule.Application.ExcelParses;
 using ImportExportModule.Application.Rabbit;
 using ImportExportModule.Application.Rabbit.Events;
 using ImportExportModule.Application.Rabbit.Producers;
 using ImportExportModule.DataLayer.Services;
+using ImportExportModule.Models.Configurations;
 using Microsoft.Extensions.Options;
 using Np.Extensions.DependencyInjection;
 using Np.Extensions.Metrics;
@@ -42,6 +44,7 @@ public static class ServiceCollectionExtensions
  
         services.AddSingleton<ITelegramService, TelegramService>();
         services.AddSingleton<IReportService, ReportService>();
+        services.AddSingleton<IServiceApiClient, ServiceApiClient>();
         
         services.AddSingleton<RegistryMongoService>();
         services.AddTransient<IExcelParser, CardRegistryParser>();
@@ -103,6 +106,8 @@ public static class ServiceCollectionExtensions
         services.ConfigureSettings<ReportsServiceSettings>(config, nameof(ReportsServiceSettings));
         services.ConfigureSettings<MetricsSettings>(config, nameof(MetricsSettings));
         services.ConfigureSettings<JwtOptions>(config, nameof(JwtOptions));
+        
+        services.ConfigureSettings<RegistriesAndApplicationSettings>(config, nameof(RegistriesAndApplicationSettings));
         
         services.ConfigureSettings<SuccessImportProducerSettings>(config, nameof(SuccessImportProducerSettings));
         services.ConfigureSettings<RabbitMqSettings>(config, nameof(RabbitMqSettings));
