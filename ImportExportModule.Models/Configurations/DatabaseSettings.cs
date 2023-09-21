@@ -1,4 +1,4 @@
-namespace ImportExportModule.Application.Configurations;
+namespace ImportExportModule.Models.Configurations;
 
 /// <summary>
 /// Класс параметров подключения к монге

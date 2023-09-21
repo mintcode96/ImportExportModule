@@ -1,4 +1,3 @@
-using ImportExportModule.Application.Configurations;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
@@ -6,6 +5,7 @@ using Hellang.Middleware.ProblemDetails;
 using ImportExportModule.Api.Configuration;
 using ImportExportModule.Application.ExcelParses;
 using ImportExportModule.DataLayer.Services;
+using ImportExportModule.Models.Configurations;
 using Np.Extensions.Metrics;
 using Np.Extensions.Metrics.MediatR;
 using Np.Logging.Logger;
@@ -19,7 +19,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseLogging(Assembly.GetExecutingAssembly().GetName().Name ?? appName,
     (_, _) => { }, configuration:builder.Configuration);
-
 
 // Add services to the container.
 builder.Services.ConfigureSettings(builder.Configuration);
@@ -55,7 +54,6 @@ app.UseHttpMetrics();
 app.UseAuthorization();
 app.UseInHttpMetrics();
 app.ConfigureAccess();
-
 
 app.UseSwagger()
     .UseSwaggerUI(c =>

@@ -34,4 +34,9 @@ public class ImportRequest
     /// </summary>
     [JsonPropertyName("merchant_id")]
     public Guid? MerchantId { get; set; }
+    
+    /// <summary>
+    /// использовать ли фейковую реализацию
+    /// </summary>
+    public bool UseFake { get; set; }
 }

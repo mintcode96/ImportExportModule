@@ -1,4 +1,4 @@
-using ImportExportModule.Application.Configurations;
+using ImportExportModule.Models.Configurations;
 using ImportExportModule.Models.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;

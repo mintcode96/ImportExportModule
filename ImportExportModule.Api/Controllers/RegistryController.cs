@@ -1,40 +1,43 @@
-using ImportExportModule.Application.ExcelParses;
-using ImportExportModule.DataLayer.Services;
+using ImportExportModule.Application.Commands.ImportRegistry;
+using ImportExportModule.Infrastructure;
 using ImportExportModule.Models.DTO.Requests;
-using ImportExportModule.Models.Models;
+using ImportExportModule.Models.DTO.Responses;
 
 namespace ImportExportModule.Api.Controllers;
 
+/// <summary>
+/// Контроллер работы с реестрами
+/// </summary>
 [ApiController]
 [Route("[Controller]")]
-public class RegistryController : Controller
+public class RegistryController : BaseController
 {
-    private readonly RegistryMongoService _registryMongoService;
-    private readonly IExcelParser _cardRegistryParser;
-
-    public RegistryController(RegistryMongoService registryMongoService, 
-        IExcelParser cardRegistryParser)
+    public RegistryController(IMediator mediator) : base(mediator)
     {
-        _registryMongoService = registryMongoService;
-        _cardRegistryParser = cardRegistryParser;
     }
 
+    /// <summary>
+    /// Загрузка реестра
+    /// </summary>
+    /// <param name="file">excel документ</param>
+    /// <param name="importParameters">параметры запроса</param>
+    /// <param name="importRegistry">использовать ли фейк результат</param>
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
     [HttpPost("ImportRegistry")]
-    public async Task<IActionResult> ImportRegistry([FromQuery] ImportRequest importParameters,
+    public async Task<ActionResult<ImportResponse>> ImportRegistry([FromQuery] ImportRequest importParameters,
         IFormFile importRegistry)
     {
-        var elements = await _cardRegistryParser.Parse(importRegistry);
-        var registry = new Registry()
-        {
-            Elements = elements.ToList(),
-            Currency = importParameters.Currency,
-            MerchantId = importParameters.MerchantId,
-            RegistryName = importParameters.Name,
-            RegistryType = importParameters.Type
-        };
+        importParameters.MerchantId ??= MemberId;
 
-        await _registryMongoService.CreateAsync(registry);
+        if (importParameters.UseFake)
+            return Accepted();
 
-        return Ok();
+        var result = await Mediator.Send(new ImportRegistryCommand(importParameters, importRegistry));
+
+        if (result.IsSuccess)
+            return result.Data;
+
+        return BadRequest(result.ErrorResponse!);
     }
 }
