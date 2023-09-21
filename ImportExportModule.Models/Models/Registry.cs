@@ -15,6 +15,7 @@ public class Registry
     [BsonRepresentation(BsonType.String)]
     public Guid? MerchantId { get; set; }
 
+    [BsonRepresentation(BsonType.String)]
     public Currency? Currency { get; set; }
 
     public List<ElementRegistry> Elements { get; set; }

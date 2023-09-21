@@ -1,6 +1,9 @@
 using System.Reflection;
 using ImportExportModule.Application.Commands.ImportRegistry;
 using ImportExportModule.Application.ExcelParses;
+using ImportExportModule.Application.Rabbit;
+using ImportExportModule.Application.Rabbit.Events;
+using ImportExportModule.Application.Rabbit.Producers;
 using ImportExportModule.DataLayer.Services;
 using Microsoft.Extensions.Options;
 using Np.Extensions.DependencyInjection;
@@ -8,12 +11,15 @@ using Np.Extensions.Metrics;
 using Np.Extensions.Metrics.Settings;
 using Np.MediatR;
 using Np.MemberAuthorizationIncoming.Settings;
+using Np.RabbitMQ;
+using Np.RabbitMQ.Settings;
 using Np.Service.Report;
 using Np.Service.Report.Models;
 using Np.Service.Telegram;
 using Np.Service.Telegram.Models;
+using RabbitMQ.Client;
 using Serilog;
-using Serilog.Core;
+using Constants = Serilog.Core.Constants;
 
 namespace ImportExportModule.Api.Configuration;
 
@@ -50,6 +56,27 @@ public static class ServiceCollectionExtensions
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
     }
+    
+    /// <summary>
+    /// ConfigureRabbitMqServices
+    /// </summary>
+    /// <param name="services"></param>
+    public static void ConfigureRabbitMqServices(this IServiceCollection services)
+    {
+        services.AddSingleton<IRabbitMqProducer<SuccessImportEvent>, SuccessImportProducer>();
+        
+        services.AddSingleton(serviceProvider =>
+        {
+            var rabbitSettings = serviceProvider.GetRequiredService<IOptions<RabbitMqSettings>>().Value;
+            var uri = new Uri(
+                $"{rabbitSettings.Protocol}://{rabbitSettings.UserName}:{rabbitSettings.Password}" +
+                $"@{rabbitSettings.Host}:{rabbitSettings.Port}/{rabbitSettings.VirtualHost}");
+            return new ConnectionFactory
+            {
+                Uri = uri
+            };
+        });
+    }
 
     /// <summary>
     /// ConfigureHttpClients
@@ -76,5 +103,8 @@ public static class ServiceCollectionExtensions
         services.ConfigureSettings<ReportsServiceSettings>(config, nameof(ReportsServiceSettings));
         services.ConfigureSettings<MetricsSettings>(config, nameof(MetricsSettings));
         services.ConfigureSettings<JwtOptions>(config, nameof(JwtOptions));
+        
+        services.ConfigureSettings<SuccessImportProducerSettings>(config, nameof(SuccessImportProducerSettings));
+        services.ConfigureSettings<RabbitMqSettings>(config, nameof(RabbitMqSettings));
     }
 }

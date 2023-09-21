@@ -22,6 +22,7 @@
       <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
       <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
       <PackageReference Include="Np.Extensions" Version="1.0.0" />
+      <PackageReference Include="Np.RabbitMQ" Version="1.0.0" />
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
       <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
     </ItemGroup>
