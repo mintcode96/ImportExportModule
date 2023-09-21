@@ -30,6 +30,7 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
         _apiClient = apiClient;
     }
 
+    /// <inheritdoc />
     public async Task<Result<ImportResponse>> Handle(ImportRegistryCommand request, CancellationToken cancellationToken)
     {
         var registry = new Registry(request.ImportParameters.Type, request.ImportParameters.Name,

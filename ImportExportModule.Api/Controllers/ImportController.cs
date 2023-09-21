@@ -1,7 +1,5 @@
 using ImportExportModule.Infrastructure;
 using ImportExportModule.Models.DTO.Requests;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ImportExportModule.Api.Controllers;
 

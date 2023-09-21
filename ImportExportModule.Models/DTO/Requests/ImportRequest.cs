@@ -3,12 +3,13 @@ using ImportExportModule.Models.Enums;
 
 namespace ImportExportModule.Models.DTO.Requests;
 
+// TODO комментарии, иначе потом ахуеем жить
 public class ImportRequest
 {
     /// <summary>
     /// Внешний идентификатор
     /// </summary>
-    [JsonPropertyName("external_id")]
+    [JsonPropertyName("external_id")] // TODO не смущает, что тут json prop, а ты передаешь как query?)
     public string ExternalId { get; set; }
 
     /// <summary>
@@ -38,5 +39,5 @@ public class ImportRequest
     /// <summary>
     /// использовать ли фейковую реализацию
     /// </summary>
-    public bool UseFake { get; set; }
+    public bool UseFake { get; set; } // TODO вот это должно передаваться как кверя
 }

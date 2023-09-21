@@ -9,8 +9,8 @@ namespace ImportExportModule.Api.Controllers;
 /// Контроллер работы с реестрами
 /// </summary>
 [ApiController]
-[Route("[Controller]")]
-public class RegistryController : BaseController
+[Route("[Controller]")]// TODO аналогично замечанию ниже, не корректное название, в целом правильно обзывать и давать их максимально явно: "registry" или "registries"
+public class RegistryController : BaseController // TODO а чем тебя не устроил ImportController? Он же как раз правильно реализован + соотвественно и ручки там корректные
 {
     public RegistryController(IMediator mediator) : base(mediator)
     {
@@ -24,8 +24,8 @@ public class RegistryController : BaseController
     /// <param name="importRegistry">использовать ли фейк результат</param>
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status202Accepted)]
-    [HttpPost("ImportRegistry")]
-    public async Task<ActionResult<ImportResponse>> ImportRegistry([FromQuery] ImportRequest importParameters,
+    [HttpPost("ImportRegistry")] // TODO вот я про это место, ручки так не называеются, в данном случае корректнее было бы использовать "import"
+    public async Task<ActionResult<ImportResponse>> ImportRegistry([FromQuery] ImportRequest importParameters, // TODO должно присылаться в теле запроса, а не в query
         IFormFile importRegistry)
     {
         importParameters.MerchantId ??= MemberId;

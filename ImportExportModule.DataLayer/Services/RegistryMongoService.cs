@@ -12,10 +12,7 @@ public class RegistryMongoService
 {
     private readonly IMongoCollection<Registry> _registryCollection;
     
-    /// <summary>
     /// ctor
-    /// </summary>
-    /// <param name="databaseSettings"></param>
     public RegistryMongoService(IOptions<DatabaseSettings> databaseSettings)
     {
         var mongoClient = new MongoClient(databaseSettings.Value.ConnectionString);
