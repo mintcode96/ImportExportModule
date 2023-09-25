@@ -10,7 +10,7 @@ namespace ImportExportModule.Infrastructure;
 /// <summary>
 /// Базовый класс контролеров с атрибутов авторизации
 /// </summary>
-//[Authorize]
+[Authorize]
 [ApiController]
 public class BaseController : ControllerBase
 {

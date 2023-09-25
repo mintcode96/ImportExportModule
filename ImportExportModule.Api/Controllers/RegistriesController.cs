@@ -25,7 +25,7 @@ public class RegistriesController : BaseController
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status202Accepted)]
     [HttpPost]
-    public async Task<ActionResult<ImportResponse>> Import([FromBody] ImportRequest request, bool useFake)
+    public async Task<ActionResult<ImportResponse>> Import([FromForm] ImportRequest request, bool useFake)
     {
         request.MerchantId ??= MemberId;
 
