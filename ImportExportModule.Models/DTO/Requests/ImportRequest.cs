@@ -1,15 +1,18 @@
 using System.Text.Json.Serialization;
 using ImportExportModule.Models.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace ImportExportModule.Models.DTO.Requests;
 
-// TODO комментарии, иначе потом ахуеем жить
+/// <summary>
+/// Тело запроса на импорт реестра
+/// </summary>
 public class ImportRequest
 {
     /// <summary>
     /// Внешний идентификатор
     /// </summary>
-    [JsonPropertyName("external_id")] // TODO не смущает, что тут json prop, а ты передаешь как query?)
+    [JsonPropertyName("external_id")]
     public string ExternalId { get; set; }
 
     /// <summary>
@@ -35,9 +38,10 @@ public class ImportRequest
     /// </summary>
     [JsonPropertyName("merchant_id")]
     public Guid? MerchantId { get; set; }
-    
+
     /// <summary>
-    /// использовать ли фейковую реализацию
+    /// Загружаемый реестр
     /// </summary>
-    public bool UseFake { get; set; } // TODO вот это должно передаваться как кверя
+    [JsonPropertyName("registry")]
+    public IFormFile Registry{ get; set; }
 }

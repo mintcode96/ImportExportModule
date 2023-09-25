@@ -9,18 +9,12 @@ public class ImportRegistryCommand : IRequest<Result<ImportResponse>>
     /// Параметры для импорта
     /// </summary>
     public ImportRequest ImportParameters { get; private set; }
-    
-    /// <summary>
-    /// Реестр для импорта
-    /// </summary>
-    public IFormFile ImportRegistry { get; private set; }
 
     /// <summary>
     /// ctor
     /// </summary>
-    public ImportRegistryCommand(ImportRequest importParameters, IFormFile importRegistry)
+    public ImportRegistryCommand(ImportRequest importParameters)
     {
         ImportParameters = importParameters;
-        ImportRegistry = importRegistry;
     }
 }

@@ -42,7 +42,7 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
             new NotificationStartImportRequest(registry.Id, registry.RegistryType.ToString(), registry.RegistryName,
                 registry.MerchantId, registry.Currency.ToString()), cancellationToken);
 
-        var elements = await _cardRegistryParser.Parse(request.ImportRegistry);
+        var elements = await _cardRegistryParser.Parse(request.ImportParameters.Registry);
 
         registry.Elements = elements.ToList();
 
