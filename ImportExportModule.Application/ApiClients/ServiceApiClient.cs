@@ -18,12 +18,15 @@ public class ServiceApiClient : BaseApiClient, IServiceApiClient
     {
         RegistriesAndApplicationSettings = registriesAndApplicationSettings;
     }
-    
+
+    /// <inheritdoc />
     public async Task NotificationStartImportAsync(
         NotificationStartImportRequest request, CancellationToken cancellationToken)
     {
         var url = RegistriesAndApplicationSettings.Value.BaseUrl + RegistriesAndApplicationSettings.Value.NotifyUrl;
         
-        await _httpClient.PostAsync(url, CreateHttpPostContent(request), cancellationToken);
+        var result = await _httpClient.PostAsync(url, CreateHttpPostContent(request), cancellationToken);
+
+        await result.ThrowIfNotSuccessStatusCode();
     }
 }

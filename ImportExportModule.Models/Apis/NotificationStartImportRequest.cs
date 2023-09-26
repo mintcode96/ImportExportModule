@@ -5,16 +5,6 @@ namespace ImportExportModule.Models.Apis;
 /// </summary>
 public class NotificationStartImportRequest
 {
-    public NotificationStartImportRequest(string id, string? registryType, string? registryName, Guid? merchantId,
-        string? currency)
-    {
-        Id = id;
-        RegistryType = registryType;
-        RegistryName = registryName;
-        MerchantId = merchantId;
-        Currency = currency;
-    }
-
     /// <summary>
     /// Идентификатор реестра(objectId)
     /// </summary>
@@ -39,4 +29,20 @@ public class NotificationStartImportRequest
     /// Валюта
     /// </summary>
     public string? Currency { get; private set; }
+
+    /// <summary>
+    /// Идентификатор клиента создавшего платеж
+    /// </summary>
+    public Guid MemberId { get; private set; }
+    
+    public NotificationStartImportRequest(string id, string? registryType, string? registryName, Guid? merchantId,
+        string? currency, Guid memberId)
+    {
+        Id = id;
+        RegistryType = registryType;
+        RegistryName = registryName;
+        MerchantId = merchantId;
+        Currency = currency;
+        MemberId = memberId;
+    }
 }
