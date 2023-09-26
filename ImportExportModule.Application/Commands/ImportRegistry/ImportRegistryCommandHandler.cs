@@ -17,9 +17,7 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
 
     private readonly IRabbitMqProducer<SuccessImportEvent> _successImportProducer;
 
-    /// <summary>
     /// ctor
-    /// </summary>
     public ImportRegistryCommandHandler(RegistryMongoService registryMongoService,
         IExcelParser cardRegistryParser, IRabbitMqProducer<SuccessImportEvent> successImportProducer,
         IServiceApiClient apiClient)

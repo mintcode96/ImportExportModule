@@ -12,10 +12,8 @@ namespace ImportExportModule.Api.Controllers;
 [Route("registries")]
 public class RegistriesController : BaseController
 {
-    //ctor
-    public RegistriesController(IMediator mediator) : base(mediator)
-    {
-    }
+    /// ctor
+    public RegistriesController(IMediator mediator) : base(mediator) { }
 
     /// <summary>
     /// Загрузка реестра

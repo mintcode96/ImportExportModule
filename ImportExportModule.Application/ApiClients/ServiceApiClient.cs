@@ -11,7 +11,7 @@ public interface IServiceApiClient
 
 public class ServiceApiClient : BaseApiClient, IServiceApiClient
 {
-    private HttpClient _httpClient;
+    private HttpClient _httpClient;// TODO у нас же есть HttpClient в BaseApiClient
     private readonly IOptions<RegistriesAndApplicationSettings> RegistriesAndApplicationSettings;
     
     public ServiceApiClient(HttpClient httpClient, IOptions<RegistriesAndApplicationSettings> registriesAndApplicationSettings):base(httpClient)

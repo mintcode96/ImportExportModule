@@ -36,5 +36,5 @@ public class ImportRequest
     /// <summary>
     /// Загружаемый реестр
     /// </summary>
-    public IFormFile Registry{ get; set; }
+    public IFormFile Registry { get; set; }
 }

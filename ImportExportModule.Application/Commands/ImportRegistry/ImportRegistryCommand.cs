@@ -10,9 +10,7 @@ public class ImportRegistryCommand : IRequest<Result<ImportResponse>>
     /// </summary>
     public ImportRequest ImportParameters { get; private set; }
 
-    /// <summary>
     /// ctor
-    /// </summary>
     public ImportRegistryCommand(ImportRequest importParameters)
     {
         ImportParameters = importParameters;
