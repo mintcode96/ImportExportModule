@@ -6,8 +6,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace ImportExportModule.Application.ExcelParses;
 
+/// <summary>
+/// Парсер реестра карт
+/// </summary>
 public class CardRegistryParser : IExcelParser
 {
+    /// <inheritdoc/>
     public async Task<IEnumerable<ElementRegistry>> Parse(IFormFile file)
     {
         var result = new List<Card>();

@@ -30,7 +30,7 @@ public class RegistriesController : BaseController
         if (useFake)
             return Accepted();
 
-        var result = await Mediator.Send(new ImportRegistryCommand(request));
+        var result = await Mediator.Send(new ImportRegistryCommand(request, MemberId));
 
         if (result.IsSuccess)
             return result.Data;

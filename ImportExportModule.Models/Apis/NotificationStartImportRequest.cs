@@ -6,9 +6,9 @@ namespace ImportExportModule.Models.Apis;
 public class NotificationStartImportRequest
 {
     /// <summary>
-    /// Идентификатор реестра(objectId)
+    /// Идентификатор реестра
     /// </summary>
-    public string Id { get; private set; }
+    public Guid Id { get; private set; }
 
     /// <summary>
     /// Тип реестра
@@ -35,7 +35,8 @@ public class NotificationStartImportRequest
     /// </summary>
     public Guid MemberId { get; private set; }
     
-    public NotificationStartImportRequest(string id, string? registryType, string? registryName, Guid? merchantId,
+    /// ctor
+    public NotificationStartImportRequest(Guid id, string? registryType, string? registryName, Guid? merchantId,
         string? currency, Guid memberId)
     {
         Id = id;

@@ -9,11 +9,6 @@ namespace ImportExportModule.Models.DTO.Requests;
 public class ImportRequest
 {
     /// <summary>
-    /// Внешний идентификатор
-    /// </summary>
-    public string ExternalId { get; set; }
-
-    /// <summary>
     /// Название реестра
     /// </summary>
     public string Name { get; set; }

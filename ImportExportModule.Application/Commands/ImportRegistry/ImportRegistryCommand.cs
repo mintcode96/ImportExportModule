@@ -9,10 +9,16 @@ public class ImportRegistryCommand : IRequest<Result<ImportResponse>>
     /// Параметры для импорта
     /// </summary>
     public ImportRequest ImportParameters { get; private set; }
+    
+    /// <summary>
+    /// Идентификатор клиента создавшего
+    /// </summary>
+    public Guid? MemberId { get; private set; }
 
     /// ctor
-    public ImportRegistryCommand(ImportRequest importParameters)
+    public ImportRegistryCommand(ImportRequest importParameters, Guid? memberId)
     {
         ImportParameters = importParameters;
+        MemberId = memberId;
     }
 }

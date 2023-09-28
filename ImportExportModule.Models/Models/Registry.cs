@@ -13,19 +13,18 @@ public class Registry
     //сtor
     public Registry(RegistryType? registryType, string? registryName, Guid? merchantId, Currency? currency)
     {
-        Id = ObjectId.GenerateNewId(DateTime.UtcNow).ToString();
+        Id = Guid.NewGuid();
         RegistryType = registryType;
         RegistryName = registryName;
         MerchantId = merchantId;
         Currency = currency;
     }
-
+    
     /// <summary>
     /// Внутренний идентификатор реестра в бд
     /// </summary>
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; private set; }
+    [BsonRepresentation(BsonType.String)]
+    public Guid Id { get; private set; }
     
     /// <summary>
     /// Тип реестра (пока что только реестр карт)

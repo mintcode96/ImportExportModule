@@ -38,7 +38,7 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
 
         await _apiClient.NotificationStartImportAsync(
             new NotificationStartImportRequest(registry.Id, registry.RegistryType.ToString(), registry.RegistryName,
-                registry.MerchantId, registry.Currency.ToString()), cancellationToken);
+                registry.MerchantId, registry.Currency.ToString(), request.MemberId.Value), cancellationToken);
 
         var elements = await _cardRegistryParser.Parse(request.ImportParameters.Registry);
 
@@ -46,7 +46,7 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
 
         await _registryMongoService.CreateAsync(registry);
 
-        _successImportProducer.Publish(new SuccessImportEvent(registry.RegistryType.ToString(),
+        _successImportProducer.Publish(new SuccessImportEvent(registry.Id, registry.RegistryType.ToString(),
             registry.RegistryName, registry.MerchantId, registry.Currency.ToString(), registry.Elements));
 
         return new ImportResponse();
