@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+RUN dotnet nuget add source http://nuget.bodhi-development.local
+WORKDIR /src
+COPY ["ImportExportModule.Api/ImportExportModule.Api.csproj", "ImportExportModule.Api/"]
+RUN dotnet restore "ImportExportModule.Api/ImportExportModule.Api.csproj"
+COPY . .
+WORKDIR "/src/ImportExportModule.Api"
+RUN dotnet build "ImportExportModule.Api.csproj" -c Release -o /app/build
+RUN dotnet publish "ImportExportModule.Api.csproj" -c Release -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "ImportExportModule.Api.dll"]
+

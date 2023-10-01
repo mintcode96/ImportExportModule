@@ -1,0 +1,24 @@
+env:
+  import-export-module:
+    - name: ElasticConfiguration__Uri
+      value: elastic-elasticsearch.elasticsearch-stage.svc.cluster.local:9200
+    - name: ElasticConfiguration__Login
+    - name: ElasticConfiguration__Password
+    - name: RabbitMqSettings__Host
+      value: processing-rabbitmq.processing-stage.svc.cluster.local
+    - name: RabbitMqSettings__Port
+      value: "5672"
+    - name: RabbitMqSettings__Protocol
+      value: amqp
+    - name: RabbitMqSettings__VirtualHost
+      value: iemodule
+    - name: RabbitMqSettings__Username
+      value: processing-user
+    - name: RabbitMqSettings__Password
+      value: processing-password
+    - name: MongoDatabase__ConnectionString
+      value: "mongodb://processing-rabbitmq.processing-stage.svc.cluster.local:27017"
+    - name: MongoDatabase__DatabaseName
+      value: "ImportExportDB"
+    - name: MongoDatabase__CollectionName
+      value: "ImportExportCollection"
