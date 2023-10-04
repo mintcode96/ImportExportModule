@@ -1,15 +1,12 @@
+using ImportExportModule.Models.Apis.NotificationsResultImport;
+
 namespace ImportExportModule.Models.Apis;
 
 /// <summary>
 /// Тело запроса на уведомление модуля реестров и заявок
 /// </summary>
-public class NotificationStartImportRequest
+public class NotificationStartImportRequest : ResultImportRequest
 {
-    /// <summary>
-    /// Идентификатор реестра
-    /// </summary>
-    public Guid Id { get; private set; }
-
     /// <summary>
     /// Тип реестра
     /// </summary>

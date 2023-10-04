@@ -13,5 +13,15 @@ public class RegistriesAndApplicationSettings
     /// <summary>
     /// кусок с методом для отправки уведомления о загрузке файла
     /// </summary>
-    public string NotifyUrl { get; set; }
+    public string NotifyStartImportUrl { get; set; }
+    
+    /// <summary>
+    /// кусок с методом для отправки уведомления о загрузке файла
+    /// </summary>
+    public string NotifySuccessImportUrl { get; set; }
+    
+    /// <summary>
+    /// кусок с методом для отправки уведомления о загрузке файла
+    /// </summary>
+    public string NotifyErrorImportUrl { get; set; }
 }

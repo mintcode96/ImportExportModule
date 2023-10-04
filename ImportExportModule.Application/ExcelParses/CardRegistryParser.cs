@@ -19,24 +19,22 @@ public class CardRegistryParser : IExcelParser
         await using (var stream = file.OpenReadStream())
         using (var reader = ExcelReaderFactory.CreateReader(stream))
         {
-            var dataset = reader.AsDataSet(new ExcelDataSetConfiguration() {
-                ConfigureDataTable = _ => new ExcelDataTableConfiguration() {
+            var dataset = reader.AsDataSet(new ExcelDataSetConfiguration()
+            {
+                ConfigureDataTable = _ => new ExcelDataTableConfiguration()
+                {
                     UseHeaderRow = true
                 }
             });
-            
-            foreach(DataRow row in dataset.Tables[0].Rows)
+
+            foreach (DataRow row in dataset.Tables[0].Rows)
             {
                 var itemsArray = row.ItemArray;
-                
-                result.Add(new Card
-                {
-                    CardNumber = itemsArray[0].ToString(),
-                    ExpirationDate = itemsArray[2].ToString(),
-                    ExternalId = itemsArray[4].ToString(),
-                    Name = itemsArray[1].ToString(),
-                    Sum = double.Parse(itemsArray[3].ToString(), CultureInfo.InvariantCulture)
-                });
+
+                var sum = double.Parse(itemsArray[3].ToString(), CultureInfo.InvariantCulture);
+
+                result.Add(new Card(itemsArray[0].ToString(), itemsArray[1].ToString(), itemsArray[2].ToString(), sum,
+                    itemsArray[4].ToString()));
             }
         }
 

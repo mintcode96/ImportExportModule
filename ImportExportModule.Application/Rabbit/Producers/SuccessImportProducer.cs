@@ -5,7 +5,7 @@ namespace ImportExportModule.Application.Rabbit.Producers;
 /// <summary>
 /// Продюссер событий при успешной загрузке реестра
 /// </summary>
-public class SuccessImportProducer : ProducerBase<SuccessImportEvent>
+public class SuccessImportProducer : ProducerBase<SuccessImportElementEvent>
 {
     /// <inheritdoc />
     protected override string RoutingKeyName { get; }

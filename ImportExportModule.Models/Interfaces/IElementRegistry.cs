@@ -1,3 +1,6 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace ImportExportModule.Models.Interfaces;
 
 /// <summary>
@@ -5,5 +8,9 @@ namespace ImportExportModule.Models.Interfaces;
 /// </summary>
 public class ElementRegistry
 {
-    
+    /// <summary>
+    /// Идентификатор элемента реестра
+    /// </summary>
+    [BsonRepresentation(BsonType.String)]
+    public Guid Id { get; set; }
 }

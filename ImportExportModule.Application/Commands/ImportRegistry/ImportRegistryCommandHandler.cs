@@ -1,8 +1,10 @@
 using ImportExportModule.Application.ApiClients;
+using ImportExportModule.Application.Errors;
 using ImportExportModule.Application.ExcelParses;
 using ImportExportModule.Application.Rabbit.Events;
 using ImportExportModule.DataLayer.Services;
 using ImportExportModule.Models.Apis;
+using ImportExportModule.Models.Apis.NotificationsResultImport;
 
 namespace ImportExportModule.Application.Commands.ImportRegistry;
 
@@ -15,11 +17,11 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
     private readonly IExcelParser _cardRegistryParser;
     private readonly IServiceApiClient _apiClient;
 
-    private readonly IRabbitMqProducer<SuccessImportEvent> _successImportProducer;
+    private readonly IRabbitMqProducer<SuccessImportElementEvent> _successImportProducer;
 
     /// ctor
     public ImportRegistryCommandHandler(RegistryMongoService registryMongoService,
-        IExcelParser cardRegistryParser, IRabbitMqProducer<SuccessImportEvent> successImportProducer,
+        IExcelParser cardRegistryParser, IRabbitMqProducer<SuccessImportElementEvent> successImportProducer,
         IServiceApiClient apiClient)
     {
         _registryMongoService = registryMongoService;
@@ -40,15 +42,29 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
             new NotificationStartImportRequest(registry.Id, registry.RegistryType.ToString(), registry.RegistryName,
                 registry.MerchantId, registry.Currency.ToString(), request.MemberId.Value), cancellationToken);
 
-        var elements = await _cardRegistryParser.Parse(request.ImportParameters.Registry);
+        try
+        {
+            var elements = await _cardRegistryParser.Parse(request.ImportParameters.Registry);
+            registry.Elements = elements.ToList();
 
-        registry.Elements = elements.ToList();
+            await _apiClient.NotificationSuccessImportAsync(
+                new NotificationSuccessImportRequest(registry.Id, registry.Elements.Count), cancellationToken);
+        }
+        catch (Exception e)
+        {
+            await _apiClient.NotificationErrorImportAsync(new NotificationErrorImportRequest(registry.Id),
+                cancellationToken);
+            
+            return new ImportError();
+        }
 
         await _registryMongoService.CreateAsync(registry);
 
-        _successImportProducer.Publish(new SuccessImportEvent(registry.Id, registry.RegistryType.ToString(),
-            registry.RegistryName, registry.MerchantId, registry.Currency.ToString(), registry.Elements));
-
-        return new ImportResponse();
+        foreach (var element in registry.Elements)
+        {
+            _successImportProducer.Publish(new SuccessImportElementEvent(registry.Id, element));
+        }
+        
+        return new ImportResponse(registry.Id, registry.Elements.Count);
     }
 }

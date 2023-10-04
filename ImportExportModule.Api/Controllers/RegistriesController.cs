@@ -22,7 +22,7 @@ public class RegistriesController : BaseController
     /// <param name="useFake">использовать ли фейковую реализацию</param>
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status202Accepted)]
-    [HttpPost]
+    [HttpPost("import")]
     public async Task<ActionResult<ImportResponse>> Import([FromForm] ImportRequest request, bool useFake)
     {
         request.MerchantId ??= MemberId;

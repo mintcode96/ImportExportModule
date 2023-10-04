@@ -66,7 +66,7 @@ public static class ServiceCollectionExtensions
     /// <param name="services"></param>
     public static void ConfigureRabbitMqServices(this IServiceCollection services)
     {
-        services.AddSingleton<IRabbitMqProducer<SuccessImportEvent>, SuccessImportProducer>();
+        services.AddSingleton<IRabbitMqProducer<SuccessImportElementEvent>, SuccessImportProducer>();
         
         services.AddSingleton(serviceProvider =>
         {
