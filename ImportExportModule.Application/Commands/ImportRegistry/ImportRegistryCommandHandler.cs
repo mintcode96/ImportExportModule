@@ -46,7 +46,7 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
         {
             var elements = await _cardRegistryParser.Parse(request.ImportParameters.Registry);
             registry.Elements = elements.ToList();
-
+            
             await _apiClient.NotificationSuccessImportAsync(
                 new NotificationSuccessImportRequest(registry.Id, registry.Elements.Count), cancellationToken);
         }

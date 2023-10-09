@@ -10,7 +10,7 @@ public class NotificationErrorImportRequest : ResultImportRequest
     /// <summary>
     /// Текст ошибки
     /// </summary>
-    public const string Error = "Ошибка при загрузке реестра";
+    public string Error { get; set; } = "Ошибка при загрузке реестра";
 
     /// ctor
     public NotificationErrorImportRequest(Guid id)
