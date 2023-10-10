@@ -5,17 +5,17 @@ env:
     - name: ElasticConfiguration__Login
     - name: ElasticConfiguration__Password
     - name: RabbitMqSettings__Host
-      value: processing-rabbitmq.processing-stage.svc.cluster.local
+      value: "c2c-rabbitmq.bodhi-development.local"
     - name: RabbitMqSettings__Port
       value: "5672"
     - name: RabbitMqSettings__Protocol
-      value: amqp
+      value: "amqp"
     - name: RabbitMqSettings__VirtualHost
-      value: iemodule
-    - name: RabbitMqSettings__Username
-      value: processing-user
+      value: "c2c"
+    - name: RabbitMqSettings__UserName
+      value: "c2c-user"
     - name: RabbitMqSettings__Password
-      value: processing-password
+      value: "nonsecretpass"
     - name: MongoDatabase__ConnectionString
       value: "mongodb://processing-rabbitmq.processing-stage.svc.cluster.local:27017"
     - name: MongoDatabase__DatabaseName
