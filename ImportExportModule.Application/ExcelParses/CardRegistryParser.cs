@@ -1,7 +1,6 @@
 using System.Data;
 using System.Globalization;
 using ExcelDataReader;
-using ImportExportModule.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace ImportExportModule.Application.ExcelParses;
