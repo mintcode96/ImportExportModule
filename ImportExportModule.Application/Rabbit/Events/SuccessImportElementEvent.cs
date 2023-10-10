@@ -18,10 +18,12 @@ public class SuccessImportElementEvent
     /// <summary>
     /// Внутренний идентификатор
     /// </summary>
+    [JsonProperty("registry_id")]
     public Guid Id { get; private set; }
 
     /// <summary>
     /// Строки реестра
     /// </summary>
+    [JsonProperty("card")]
     public ElementRegistry Element { get; set; }
 }
