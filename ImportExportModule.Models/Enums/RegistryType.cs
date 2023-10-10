@@ -5,5 +5,18 @@ namespace ImportExportModule.Models.Enums;
 /// </summary>
 public enum RegistryType
 { 
-    CardRegistry = 0 //рестр карт
+    /// <summary>
+    /// Карты
+    /// </summary>
+    Card = 1,
+    
+    /// <summary>
+    /// СБП
+    /// </summary>
+    Sbp = 2,
+    
+    /// <summary>
+    /// Крипта
+    /// </summary>
+    Cryptocurrency = 3
 }

@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace ImportExportModule.Models.Interfaces;
+namespace ImportExportModule.Models.Models;
 
 /// <summary>
 /// Элемент реестра эквивалентен строке из него 

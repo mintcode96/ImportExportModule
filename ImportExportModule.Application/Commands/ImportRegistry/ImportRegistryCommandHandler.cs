@@ -5,6 +5,7 @@ using ImportExportModule.Application.Rabbit.Events;
 using ImportExportModule.DataLayer.Services;
 using ImportExportModule.Models.Apis;
 using ImportExportModule.Models.Apis.NotificationsResultImport;
+using ImportExportModule.Models.Enums;
 
 namespace ImportExportModule.Application.Commands.ImportRegistry;
 
@@ -62,7 +63,8 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
 
         foreach (var element in registry.Elements)
         {
-            _successImportProducer.Publish(new SuccessImportElementEvent(registry.Id, element));
+            var paymentType = new PaymentType(element, "PaymentTypeCard", RegistryType.Card);
+            _successImportProducer.Publish(new SuccessImportElementEvent(registry.Id, paymentType));
         }
         
         return new ImportResponse(registry.Id, registry.Elements.Count);
