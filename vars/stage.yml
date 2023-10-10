@@ -22,3 +22,11 @@ env:
       value: "ImportExportDB"
     - name: MongoDatabase__CollectionName
       value: "ImportExportCollection"
+    - name: RegistriesAndApplicationSettings__BaseUrl
+      value: "https://registries-and-applications-api.securecreditpay.com"
+    - name: RegistriesAndApplicationSettings__NotifyStartImportUrl
+      value: "/registry/create"
+    - name: RegistriesAndApplicationSettings__NotifySuccessImportUrl
+      value: "/registry/success"
+    - name: RegistriesAndApplicationSettings__NotifyErrorImportUrl
+      value: "/registry/error"
