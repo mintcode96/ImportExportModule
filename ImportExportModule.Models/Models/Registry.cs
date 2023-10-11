@@ -10,7 +10,7 @@ namespace ImportExportModule.Models.Models;
 public class Registry
 {
     //сtor
-    public Registry(RegistryType? registryType, string? registryName, Guid? merchantId, Currency? currency)
+    public Registry(RegistryTypeEnum? registryType, string? registryName, Guid? merchantId, Currency? currency)
     {
         Id = Guid.NewGuid();
         RegistryType = registryType;
@@ -29,7 +29,7 @@ public class Registry
     /// Тип реестра (пока что только реестр карт)
     /// </summary>
     [BsonRepresentation(BsonType.String)]
-    public RegistryType? RegistryType { get; private set; }
+    public RegistryTypeEnum? RegistryType { get; private set; }
     
     /// <summary>
     /// Название реестра передается с фронта

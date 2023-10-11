@@ -1,5 +1,4 @@
-using Newtonsoft.Json;
-
+using System.Text.Json.Serialization;
 
 namespace ImportExportModule.Models.Models;
 
@@ -11,31 +10,31 @@ public class Card : ElementRegistry
     /// <summary>
     /// Номер карты
     /// </summary>
-    [JsonProperty("card_number")]
+    [JsonPropertyName("card_number")]
     public string CardNumber { get; private set; }
     
     /// <summary>
     /// ИмяФамилия держателя
     /// </summary>
-    [JsonProperty("full_name")]
+    [JsonPropertyName("full_name")]
     public string Name { get; private set; }
     
     /// <summary>
     /// Срок действия
     /// </summary>
-    [JsonProperty("expire_date")]
+    [JsonPropertyName("expire_date")]
     public string? ExpirationDate { get; private set; }
     
     /// <summary>
     /// Сумма выплаты
     /// </summary>
-    [JsonProperty("amount")]
+    [JsonPropertyName("amount")]
     public double Sum { get; private set; }
     
     /// <summary>
     /// Внешний идентификатор
     /// </summary>
-    [JsonProperty("external_id")]
+    [JsonPropertyName("external_id")]
     public string ExternalId { get; private set; }
 
     /// ctor

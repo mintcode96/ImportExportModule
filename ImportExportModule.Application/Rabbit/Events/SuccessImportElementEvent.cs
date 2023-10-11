@@ -8,24 +8,22 @@ namespace ImportExportModule.Application.Rabbit.Events;
 public class SuccessImportElementEvent
 {
     /// ctor
-    public SuccessImportElementEvent(Guid id,
-        PaymentType type)
+    public SuccessImportElementEvent(Guid registryId,
+        PaymentType paymentType)
     {
-        Id = id;
-        Type = type;
+        RegistryId = registryId;
+        PaymentType = paymentType;
     }
 
     /// <summary>
     /// Внутренний идентификатор
     /// </summary>
-    [JsonProperty("registry_id")]
-    public Guid Id { get; private set; }
+    public Guid RegistryId { get; private set; }
 
     /// <summary>
     /// Строки реестра
     /// </summary>
-    [JsonProperty("payment_type")]
-    public PaymentType Type { get; private set; }
+    public PaymentType PaymentType { get; private set; }
 }
 
 /// <summary>
@@ -38,29 +36,26 @@ public class SuccessImportElementEvent
 /// PaymentTypeSbp</i></remarks>
 public class PaymentType
 {
-    /// ctor
-    public PaymentType(ElementRegistry element, string nameType, RegistryType type)
-    {
-        Element = element;
-        NameType = nameType;
-        Type = type;
-    }
-
     /// <summary>
-    /// Сам элемент платежа в реестрах и заявках
+    /// Название типа платежа
     /// </summary>
-    [JsonProperty("value")]
-    public ElementRegistry Element { get; private set; }
+    public string NameType { get; private set; }
     
     /// <summary>
     /// Тип реестра для платежа
     /// </summary>
-    [JsonProperty("type")]
-    public RegistryType Type { get; private set; }
+    public RegistryTypeEnum Type { get; private set; }
     
     /// <summary>
-    /// Название типа платежа
+    /// Сам элемент платежа в реестрах и заявках
     /// </summary>
-    [JsonProperty("name_type")]
-    public string NameType { get; private set; }
+    public ElementRegistry Value { get; private set; }
+    
+    /// ctor
+    public PaymentType(ElementRegistry value, string nameType, RegistryTypeEnum type)
+    {
+        Value = value;
+        NameType = nameType;
+        Type = type;
+    }
 }

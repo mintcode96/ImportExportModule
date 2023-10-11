@@ -21,7 +21,7 @@ public class ImportRequest
     /// <summary>
     /// Валюта - всегда RUB
     /// </summary>
-    public RegistryType Type { get; set; }
+    public RegistryTypeEnum TypeEnum { get; set; }
 
     /// <summary>
     /// список мерчей

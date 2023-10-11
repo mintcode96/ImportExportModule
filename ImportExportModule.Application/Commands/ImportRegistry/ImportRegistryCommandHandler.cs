@@ -34,7 +34,9 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
     /// <inheritdoc />
     public async Task<Result<ImportResponse>> Handle(ImportRegistryCommand request, CancellationToken cancellationToken)
     {
-        var registry = new Registry(request.ImportParameters.Type, request.ImportParameters.Name,
+        
+        // TODO проверь, что такого реестра с уникальным именем нет
+        var registry = new Registry(request.ImportParameters.TypeEnum, request.ImportParameters.Name,
             request.ImportParameters.MerchantId, request.ImportParameters.Currency);
 
         //todo: Сделать валидацию вообще таблицы, могут быть траблы с данными + обсудить с ребятами
@@ -63,7 +65,7 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
 
         foreach (var element in registry.Elements)
         {
-            var paymentType = new PaymentType(element, "PaymentTypeCard", RegistryType.Card);
+            var paymentType = new PaymentType(element, "PaymentTypeCard", RegistryTypeEnum.Card);
             _successImportProducer.Publish(new SuccessImportElementEvent(registry.Id, paymentType));
         }
         

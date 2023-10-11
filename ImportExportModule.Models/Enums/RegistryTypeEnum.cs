@@ -3,7 +3,7 @@ namespace ImportExportModule.Models.Enums;
 /// <summary>
 /// Тип реестра
 /// </summary>
-public enum RegistryType
+public enum RegistryTypeEnum
 { 
     /// <summary>
     /// Карты
