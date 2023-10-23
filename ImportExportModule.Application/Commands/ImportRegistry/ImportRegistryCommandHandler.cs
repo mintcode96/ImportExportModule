@@ -16,14 +16,14 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
 {
     private readonly RegistryMongoService _registryMongoService;
     private readonly IExcelParser _cardRegistryParser;
-    private readonly IServiceApiClient _apiClient;
+    private readonly IRegistriesAndApplicationApiClient _apiClient;
 
     private readonly IRabbitMqProducer<SuccessImportElementEvent> _successImportProducer;
 
     /// ctor
     public ImportRegistryCommandHandler(RegistryMongoService registryMongoService,
         IExcelParser cardRegistryParser, IRabbitMqProducer<SuccessImportElementEvent> successImportProducer,
-        IServiceApiClient apiClient)
+        IRegistriesAndApplicationApiClient apiClient)
     {
         _registryMongoService = registryMongoService;
         _cardRegistryParser = cardRegistryParser;

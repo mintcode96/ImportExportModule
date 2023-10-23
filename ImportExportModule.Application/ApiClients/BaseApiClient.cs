@@ -8,16 +8,13 @@ public class BaseApiClient
     /// <summary>
     /// HttpClient
     /// </summary>
-    protected readonly HttpClient? HttpClient;
+    protected readonly HttpClient HttpClient;
     
     /// <summary>ctor</summary>
     protected BaseApiClient(HttpClient httpClient)
     {
         HttpClient = httpClient;
     }
-    
-    /// <summary>ctor</summary>
-    protected BaseApiClient() { }
 
     /// <summary>
     /// Парсинг полученного ответа в необходимый класс

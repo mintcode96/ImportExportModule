@@ -6,13 +6,19 @@ using ImportExportModule.Application.Rabbit;
 using ImportExportModule.Application.Rabbit.Events;
 using ImportExportModule.Application.Rabbit.Producers;
 using ImportExportModule.DataLayer.Services;
+using ImportExportModule.Infrastructure.Extensions;
 using ImportExportModule.Models.Configurations;
 using Microsoft.Extensions.Options;
 using Np.Extensions.DependencyInjection;
 using Np.Extensions.Metrics;
+using Np.Extensions.Metrics.MediatR;
 using Np.Extensions.Metrics.Settings;
+using Np.Logging.Logger.Http;
 using Np.MediatR;
 using Np.MemberAuthorizationIncoming.Settings;
+using Np.Policy.ClientPolicy;
+using Np.Policy.ClientPolicy.Interfaces;
+using Np.Policy.Settings;
 using Np.RabbitMQ;
 using Np.RabbitMQ.Settings;
 using Np.Service.Report;
@@ -44,7 +50,6 @@ public static class ServiceCollectionExtensions
  
         services.AddSingleton<ITelegramService, TelegramService>();
         services.AddSingleton<IReportService, ReportService>();
-        services.AddSingleton<IServiceApiClient, ServiceApiClient>();
         
         services.AddSingleton<RegistryMongoService>();
         services.AddTransient<IExcelParser, CardRegistryParser>();
@@ -89,10 +94,27 @@ public static class ServiceCollectionExtensions
     {
         var serviceProvider = services.BuildServiceProvider();
         var metricsSettings = serviceProvider.GetRequiredService<IOptions<MetricsSettings>>().Value;
+        var settings = serviceProvider.GetRequiredService<IOptions<RegistriesAndApplicationSettings>>().Value;
+        var clientPolicy = serviceProvider.GetRequiredService<IClientPolicy>();
 
+        services.AddHttpClient<IRegistriesAndApplicationApiClient, RegistriesAndApplicationApiClient>(client =>
+                client.WithBaseAddress(settings.BaseUrl))
+            .AddHttpMessageHandler<HttpOutMetricsHandler>()
+            .AddTransientHttpErrorPolicy(x => clientPolicy.GetPolicy(x))
+            .AddHttpMessageHandler<LoggingHandler>();
+        
         MetricsExtensions.CreateCollector(Logger, metricsSettings);
 
         services.AddHttpClient();
+    }
+
+    /// <summary>
+    /// ConfigureApiClient
+    /// </summary>
+    public static void ConfigureApiClients(this IServiceCollection service)
+    {
+        service.AddScoped<IClientPolicy, ClientPolicy>();
+        service.AddScoped<IRegistriesAndApplicationApiClient, RegistriesAndApplicationApiClient>();
     }
 
     /// <summary>
@@ -107,6 +129,7 @@ public static class ServiceCollectionExtensions
         services.ConfigureSettings<MetricsSettings>(config, nameof(MetricsSettings));
         services.ConfigureSettings<JwtOptions>(config, nameof(JwtOptions));
         
+        services.ConfigureSettings<OutRequestRetrySettings>(config, nameof(OutRequestRetrySettings));
         services.ConfigureSettings<RegistriesAndApplicationSettings>(config, nameof(RegistriesAndApplicationSettings));
         
         services.ConfigureSettings<SuccessImportProducerSettings>(config, nameof(SuccessImportProducerSettings));

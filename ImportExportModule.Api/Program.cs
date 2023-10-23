@@ -26,6 +26,7 @@ ProblemDetailsExtensions.AddProblemDetails(builder.Services);
 builder.Services.ConfigureTracer(appName);
 builder.Services.AddSingleton<MetricReporter>();
 builder.Services.AddTransient<HttpOutMetricsHandler>();
+builder.Services.ConfigureApiClients();
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureRabbitMqServices();
 builder.Services.ConfigureSwagger(appName);

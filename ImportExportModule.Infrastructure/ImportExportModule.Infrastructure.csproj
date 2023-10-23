@@ -18,6 +18,7 @@
       <PackageReference Include="Np.Extensions.Metrics" Version="1.0.0" />
       <PackageReference Include="Np.MediatR" Version="1.0.0" />
       <PackageReference Include="Np.MemberAuthorizationIncoming" Version="1.1.0" />
+      <PackageReference Include="Np.Policy" Version="1.0.0" />
       <PackageReference Include="Np.RabbitMQ" Version="1.0.0" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>

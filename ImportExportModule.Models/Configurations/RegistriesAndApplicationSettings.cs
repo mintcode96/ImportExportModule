@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ImportExportModule.Models.Configurations;
 
 /// <summary>
@@ -8,20 +10,6 @@ public class RegistriesAndApplicationSettings
     /// <summary>
     /// Базовый урл приложения
     /// </summary>
-    public string BaseUrl { get; set; }
-    
-    /// <summary>
-    /// кусок с методом для отправки уведомления о загрузке файла
-    /// </summary>
-    public string NotifyStartImportUrl { get; set; }
-    
-    /// <summary>
-    /// кусок с методом для отправки уведомления о загрузке файла
-    /// </summary>
-    public string NotifySuccessImportUrl { get; set; }
-    
-    /// <summary>
-    /// кусок с методом для отправки уведомления о загрузке файла
-    /// </summary>
-    public string NotifyErrorImportUrl { get; set; }
+    [Required]
+    public string BaseUrl { get; set; } = string.Empty;
 }
