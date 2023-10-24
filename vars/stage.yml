@@ -17,7 +17,7 @@ env:
     - name: RabbitMqSettings__Password
       value: "nonsecretpass"
     - name: MongoDatabase__ConnectionString
-      value: "mongodb://processing-rabbitmq.processing-stage.svc.cluster.local:27017"
+      value: "mongodb://processing-mongodb.processing-stage.svc.cluster.local:27017"
     - name: MongoDatabase__DatabaseName
       value: "ImportExportDB"
     - name: MongoDatabase__CollectionName
