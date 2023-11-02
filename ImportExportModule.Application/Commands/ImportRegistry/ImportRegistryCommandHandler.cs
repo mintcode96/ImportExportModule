@@ -34,8 +34,11 @@ public class ImportRegistryCommandHandler : IRequestHandler<ImportRegistryComman
     /// <inheritdoc />
     public async Task<Result<ImportResponse>> Handle(ImportRegistryCommand request, CancellationToken cancellationToken)
     {
+        var hasRegistry = await _registryMongoService.IsExistByRegistryName(request.ImportParameters.Name);
+
+        if (hasRegistry)
+            return new RegistryAlreadyExistError();
         
-        // TODO проверь, что такого реестра с уникальным именем нет
         var registry = new Registry(request.ImportParameters.TypeEnum, request.ImportParameters.Name,
             request.ImportParameters.MerchantId, request.ImportParameters.Currency);
 

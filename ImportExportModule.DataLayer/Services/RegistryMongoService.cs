@@ -25,4 +25,10 @@ public class RegistryMongoService
     /// </summary>
     /// <param name="registry"></param>
     public async Task CreateAsync(Registry registry) => await _registryCollection.InsertOneAsync(registry);
+
+    /// <summary>
+    /// Проверить имеется ли реестр с таким названием
+    /// </summary>
+    public async Task<bool> IsExistByRegistryName(string name) =>
+        await _registryCollection.Find(s => s.RegistryName == name).AnyAsync();
 }
